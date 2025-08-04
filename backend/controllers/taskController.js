@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 //get task function
 const Task = reuire('../modles/Task')
 
@@ -57,6 +56,3 @@ const deleteTask = async(req, res) =>{
     }
 };
 module.exports = {getTasks, addTask, updateTask, deleteTask};
-=======
-
->>>>>>> d2373d542fac947caf2a338f827fc62a6bca9e30
