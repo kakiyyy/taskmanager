@@ -25,4 +25,3 @@
 
 ---
 
-[![Backend CI](https://github.com/rajuiit/taskmanager_aws_setup/actions/workflows/ci.yml/badge.svg)](https://github.com/rajuiit/taskmanager_aws_setup/actions/workflows/ci.yml)
