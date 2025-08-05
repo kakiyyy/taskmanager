@@ -1,34 +1,30 @@
-//get task function
-const Task = reuire('../modles/Task')
+const Task = require('../models/Task');
 
 const getTasks = async (req, res) => {
-    try{
-        const tasks = await Task.find({userld:req.user.id});
+    try {
+        const tasks = await Task.find({ userId: req.user.id });
         res.json(tasks);
-    }catch(error){
-        res.status(500).json({message: error.message});
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
 };
 
-//add task function
-
-const addTask = async(req, res)=>{
-    const{title, description, deadline} = req.body;
-    try{
-        const task = await Task.create({userld: req.user.id, title, description, deadline});
+const addTask = async (req, res) => {
+    const { title, description, deadline } = req.body;
+    try {
+        const task = await Task.create({ userId: req.user.id, title, description, deadline });
         res.status(201).json(task);
     } catch (error) {
-        res.status(500).json({message: error.message});
+        res.status(500).json({ message: error.message });
     }
 };
 
-//update task
 
-const updateTask = async(req, res)=> {
-    const {title, description, completed, deadline} = req.body;
-    try{
-        const task = await Task.findByld(req.params.id);
-        if(!task) return res.status(404).json({message:'Task not found'});
+const updateTask = async (req, res) => {
+    const { title, description, completed, deadline } = req.body;
+    try {
+        const task = await Task.findById(req.params.id);
+        if (!task) return res.status(404).json({ message: 'Task not found' });
 
         task.title = title || task.title;
         task.description = description || task.description;
@@ -37,22 +33,23 @@ const updateTask = async(req, res)=> {
 
         const updatedTask = await task.save();
         res.json(updatedTask);
-    } catch(error){
-        res.status(500).json({message: error.message});
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
 };
 
-//delete task
 
-const deleteTask = async(req, res) =>{
-    try{
-        const task = await Task.findByld(req.params.id);
-        if (!task) return res.status(404).json({message:'Task not found'});
+const deleteTask = async (req, res) => {
+    try {
+        const task = await Task.findById(req.params.id);
+        if (!task) return res.status(404).json({ message: 'Task not found' });
 
         await task.remove();
-        res.json({message:'Task deleted'});
-    } catch(error){
-        res.status(500).json({message: error.message});
+        res.json({ message: 'Task deleted' });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
 };
-module.exports = {getTasks, addTask, updateTask, deleteTask};
+
+
+module.exports = { getTasks, addTask, updateTask, deleteTask };
